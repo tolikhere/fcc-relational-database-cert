@@ -1,6 +1,6 @@
 # 🌌 Celestial Bodies Database
 
-This project is a comprehensive relational model of a universe, built as part of the FreeCodeCamp Relational Database Certification. It explores complex data relationships, scientific measurements, and custom organizational tracking.
+This project is a comprehensive relational model of a universe, built as part of the [FreeCodeCamp Relational Database Certification](https://www.freecodecamp.org/learn/relational-databases-v9/). The first major milestone of this certification involved designing a relational model of a universe from scratch.
 
 ## 🏛 Database Schema
 
@@ -14,16 +14,18 @@ The database consists of **5 tables** with a strictly enforced 1-to-Many hierarc
 
 ## 🛠 Technical Implementation
 
-### Data Integrity & Constraints
+### ✨ Data Integrity & Constraints
 - **Primary Keys:** Every table uses a `SERIAL` auto-incrementing integer for unique identification.
 - **Foreign Keys:** Enforced referential integrity ensures that no moon exists without a planet, no planet without a star, etc.
 - **Unique Constraints:** All celestial bodies and academies have `UNIQUE` name constraints to prevent data duplication.
-- **Data Types:** 
-  - `NUMERIC(9,3)` for distances in Millions of Light Years (Mly).
-  - `NUMERIC(8,4)` for Star Mass in Solar Masses.
-  - `BOOLEAN` flags for `has_life`, `is_spherical`, and `is_active`.
 
-### Featured Query
+### ✨ Database Highlights:
+- **Hierarchical Structure:** A clean 1-to-Many chain connecting Galaxies, Stars, Planets, and Moons.
+- **Custom Logic:** Added a `jedi_academy` table to track student counts and years founded on specific planets.
+- **Strict Data Integrity:** Implemented `PRIMARY KEY`, `FOREIGN KEY`, `UNIQUE`, and `NOT NULL` constraints.
+- **Precision Data:** Used `NUMERIC(9,3)` for astronomical distances and `NUMERIC(8,4)` for solar masses to ensure scientific accuracy.
+
+### ✨ Featured Query
 To see the full hierarchy of the universe, including our Jedi students, I use the following Join:
 
 ```sql
@@ -40,4 +42,13 @@ LEFT JOIN planet p ON s.star_id = p.star_id
 LEFT JOIN moon m ON p.planet_id = m.planet_id
 LEFT JOIN jedi_academy a ON p.planet_id = a.planet_id
 ORDER BY g.name, s.name, p.name;
+```
 
+
+## 📦 How to Rebuild the Database:
+To recreate this universe in your local PostgreSQL instance:
+1. Clone the repository.
+2. Run the following command in your terminal:
+   ```bash
+   psql -U postgres < universe.sql
+   ```
